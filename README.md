@@ -1,5 +1,7 @@
 # 生成AIパスポート 勉強ノート
 
+### 📘 https://miyazakiryuji.github.io/genai-passport-notes/
+
 生成AIパスポート試験（一般社団法人 生成AI活用普及協会／GUGA）の自習用ノート。
 1ページ完結の HTML で、外部 CDN に依存していない（オフラインでもそのまま開ける）。
 
@@ -30,7 +32,8 @@
 
 ## 使い方
 
-- ブラウザで `index.html` を開くだけ。ビルド不要
+- **公開ページ**：<https://miyazakiryuji.github.io/genai-passport-notes/>（スマホからはこちら）
+- 手元で開くなら `index.html` をブラウザにドロップするだけ。ビルド不要
 - 右上の **配色** ボタンで 自動 / 明るい / 暗い を切り替え（選択はブラウザに保存される）
 - **印刷 / PDF** ボタンで、一問一答をすべて開いた状態の紙面を出力できる
 - 1ページなので `Ctrl`（`⌘`）+ `F` で全体を串刺し検索できる
@@ -45,6 +48,11 @@
 
 - `robots.txt`（サイト全体 Disallow）と `<meta name="robots" content="noindex,...">` の二重で、
   検索エンジンにこのサイトを登録させないようにしている
-- ただし効くのは Pages のサイト（`miyazakiryuji.github.io/...`）まで。
+- ただし効くのは Pages のサイト（<https://miyazakiryuji.github.io/genai-passport-notes/>）まで。
   **GitHub のリポジトリページ（`github.com/...`）は Public なので検索に載りうる**。
   そこまで隠すならリポジトリを private に戻し、Pages 以外のホスティングへ移す必要がある
+
+## 公開の仕組み
+
+`main` ブランチのルートを GitHub Pages が配信している。
+**`git push` するだけでサイトに反映される**（ビルドは20秒ほど）。
