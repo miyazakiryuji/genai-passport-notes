@@ -40,3 +40,11 @@
 - 試験対策として整理した個人ノートであり、公式の見解ではない
 - 出題範囲・受験要項は必ず[公式サイト](https://guga.or.jp/generativeaiexam/)の一次情報で確認すること
 - モデルの仕様や提供状況は変化が速いため、年月・数値は**試験教材の記述に合わせて**ある
+
+## 検索避け
+
+- `robots.txt`（サイト全体 Disallow）と `<meta name="robots" content="noindex,...">` の二重で、
+  検索エンジンにこのサイトを登録させないようにしている
+- ただし効くのは Pages のサイト（`miyazakiryuji.github.io/...`）まで。
+  **GitHub のリポジトリページ（`github.com/...`）は Public なので検索に載りうる**。
+  そこまで隠すならリポジトリを private に戻し、Pages 以外のホスティングへ移す必要がある
