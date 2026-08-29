@@ -1,0 +1,1428 @@
+<!doctype html>
+<html lang="ja" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>生成AIパスポート 勉強ノート</title>
+<meta name="description" content="生成AIパスポート試験の勉強ノート。テキスト・画像・音楽・音声・動画の5つの生成AIと、ChatGPTの概要・歴史をまとめた1ページ完結の要点整理。">
+<style>
+/* ============================================================
+   生成AIパスポート 勉強ノート — styles
+   外部依存なし（フォント・JS・CSSともにCDN不使用）
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+  --bg:          #f6f6f3;
+  --surface:     #ffffff;
+  --surface-2:   #f0efeb;
+  --border:      #e2e1db;
+  --border-soft: #edece7;
+  --text:        #1b1c19;
+  --text-2:      #45463f;
+  --muted:       #71736a;
+  --accent:      #2b5bc4;
+  --accent-soft: #eaf0fe;
+  --warn:        #a35a00;
+  --warn-soft:   #fdf3e4;
+  --shadow:      0 1px 2px rgba(20,20,15,.05), 0 8px 24px -16px rgba(20,20,15,.18);
+
+  --cat-text:  #2b62c9;  --cat-text-soft:  #eaf1fe;
+  --cat-img:   #7b45bd;  --cat-img-soft:   #f3ecfd;
+  --cat-music: #a86a06;  --cat-music-soft: #fcf2df;
+  --cat-voice: #0b7d72;  --cat-voice-soft: #e3f6f2;
+  --cat-video: #bc3f5a;  --cat-video-soft: #fdecef;
+  --cat-gpt:   #1f7a52;  --cat-gpt-soft:   #e6f5ec;
+
+  --radius: 10px;
+  --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+          "Noto Sans JP", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg:          #131418;
+    --surface:     #1a1c21;
+    --surface-2:   #222429;
+    --border:      #2e3138;
+    --border-soft: #262930;
+    --text:        #e9e9e5;
+    --text-2:      #c6c7c1;
+    --muted:       #93958d;
+    --accent:      #85a9ff;
+    --accent-soft: #1b2440;
+    --warn:        #e0a45c;
+    --warn-soft:   #2e2519;
+    --shadow:      0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+
+    --cat-text:  #7ea9ff;  --cat-text-soft:  #1a2440;
+    --cat-img:   #b790f0;  --cat-img-soft:   #2a2140;
+    --cat-music: #e0ac54;  --cat-music-soft: #322612;
+    --cat-voice: #4ecdbd;  --cat-voice-soft: #12302c;
+    --cat-video: #f08099;  --cat-video-soft: #351c22;
+    --cat-gpt:   #5cc38d;  --cat-gpt-soft:   #14301f;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:          #131418;
+  --surface:     #1a1c21;
+  --surface-2:   #222429;
+  --border:      #2e3138;
+  --border-soft: #262930;
+  --text:        #e9e9e5;
+  --text-2:      #c6c7c1;
+  --muted:       #93958d;
+  --accent:      #85a9ff;
+  --accent-soft: #1b2440;
+  --warn:        #e0a45c;
+  --warn-soft:   #2e2519;
+  --shadow:      0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+
+  --cat-text:  #7ea9ff;  --cat-text-soft:  #1a2440;
+  --cat-img:   #b790f0;  --cat-img-soft:   #2a2140;
+  --cat-music: #e0ac54;  --cat-music-soft: #322612;
+  --cat-voice: #4ecdbd;  --cat-voice-soft: #12302c;
+  --cat-video: #f08099;  --cat-video-soft: #351c22;
+  --cat-gpt:   #5cc38d;  --cat-gpt-soft:   #14301f;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.85;
+  letter-spacing: .012em;
+  font-feature-settings: "palt" 1;
+}
+img { max-width: 100%; }
+a { color: var(--accent); text-underline-offset: .18em; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  -webkit-backdrop-filter: saturate(1.6) blur(10px);
+  backdrop-filter: saturate(1.6) blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar__inner {
+  max-width: 1180px; margin: 0 auto; padding: 10px 20px;
+  display: flex; align-items: center; gap: 14px;
+}
+.brand { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.brand__title { font-size: 15px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
+.brand__sub {
+  font-size: 11.5px; color: var(--muted); white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.topbar__spacer { flex: 1; }
+.btn {
+  appearance: none; border: 1px solid var(--border); background: var(--surface);
+  color: var(--text-2); font: inherit; font-size: 12.5px; line-height: 1;
+  padding: 7px 12px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.btn:hover { background: var(--surface-2); color: var(--text); }
+.progress {
+  position: absolute; left: 0; bottom: -1px; height: 2px;
+  background: var(--accent); width: 0; transition: width .1s linear;
+}
+
+/* ---------- layout ---------- */
+.layout {
+  max-width: 1180px; margin: 0 auto; padding: 0 20px 96px;
+  display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 44px;
+  align-items: start;
+}
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; gap: 0; } }
+
+/* ---------- side nav ---------- */
+.toc { position: sticky; top: 72px; padding: 28px 0; max-height: calc(100vh - 72px); overflow-y: auto; }
+.toc__label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .14em; color: var(--muted);
+  text-transform: uppercase; margin: 0 0 10px 10px;
+}
+.toc a {
+  display: block; padding: 5px 10px; border-radius: 7px;
+  font-size: 13px; line-height: 1.5; color: var(--text-2); text-decoration: none;
+  border-left: 2px solid transparent; transition: background .12s, color .12s;
+}
+.toc a:hover { background: var(--surface-2); color: var(--text); }
+.toc a.is-active { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.toc a.toc--sub { padding-left: 22px; font-size: 12.5px; color: var(--muted); }
+.toc hr { border: 0; border-top: 1px solid var(--border-soft); margin: 12px 10px; }
+@media (max-width: 900px) {
+  .toc { position: static; max-height: none; padding: 16px 0 0; }
+  .toc__inner { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 12px; }
+  .toc__label { margin-left: 4px; }
+}
+
+/* ---------- hero ---------- */
+.hero { padding: 52px 0 8px; }
+.hero h1 {
+  font-size: clamp(26px, 4.4vw, 38px); line-height: 1.35; margin: 0 0 14px;
+  letter-spacing: -.005em; font-weight: 800;
+}
+.hero__lead { font-size: 15.5px; color: var(--text-2); margin: 0 0 22px; max-width: 62ch; }
+.hero__meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; padding: 4px 11px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+}
+
+/* ---------- sections ---------- */
+section { scroll-margin-top: 84px; padding-top: 46px; }
+h2 {
+  font-size: 23px; font-weight: 800; line-height: 1.45; margin: 0 0 6px;
+  letter-spacing: -.003em; display: flex; align-items: center; gap: 11px; flex-wrap: wrap;
+}
+h2 .num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 27px; height: 27px; padding: 0 7px; border-radius: 7px;
+  background: var(--cat, var(--accent)); color: #fff;
+  font-size: 13px; font-weight: 700; letter-spacing: 0; flex: none;
+}
+:root[data-theme="dark"] h2 .num, :root:not([data-theme="light"]) h2 .num { color: #14151a; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) h2 .num { color: #fff; } }
+h3 {
+  font-size: 16.5px; font-weight: 700; margin: 30px 0 8px; line-height: 1.6;
+  padding-left: 11px; border-left: 3px solid var(--cat, var(--accent));
+}
+h4 { font-size: 14.5px; font-weight: 700; margin: 20px 0 6px; color: var(--text); }
+.sec-lead { color: var(--muted); font-size: 13.5px; margin: 0 0 18px; }
+p { margin: 0 0 14px; }
+.hr { border: 0; border-top: 1px solid var(--border); margin: 46px 0 0; }
+
+/* ---------- card ---------- */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px; margin: 16px 0;
+  box-shadow: var(--shadow);
+}
+.card > :first-child { margin-top: 0; }
+.card > :last-child { margin-bottom: 0; }
+.card--flat { box-shadow: none; background: var(--surface-2); border-color: var(--border-soft); }
+
+/* ---------- callouts ---------- */
+.callout {
+  border-radius: var(--radius); padding: 14px 18px; margin: 18px 0;
+  border: 1px solid var(--border); border-left: 3px solid var(--cat, var(--accent));
+  background: var(--cat-soft, var(--accent-soft));
+}
+.callout__title {
+  font-size: 12px; font-weight: 800; letter-spacing: .08em;
+  color: var(--cat, var(--accent)); margin: 0 0 7px;
+}
+.callout ul, .callout ol { margin: 0; padding-left: 1.25em; }
+.callout li { margin: 3px 0; }
+.callout p:last-child { margin-bottom: 0; }
+.callout--warn { --cat: var(--warn); --cat-soft: var(--warn-soft); }
+
+/* ---------- lists ---------- */
+ul, ol { margin: 0 0 14px; padding-left: 1.35em; }
+li { margin: 5px 0; }
+li > ul, li > ol { margin: 4px 0; }
+.tight li { margin: 2px 0; }
+
+/* ---------- keyword / mark ---------- */
+b, strong { font-weight: 700; }
+.kw {
+  background: linear-gradient(transparent 62%, color-mix(in srgb, var(--cat, var(--accent)) 26%, transparent) 62%);
+  font-weight: 700; padding: 0 1px;
+}
+code {
+  font-family: var(--mono); font-size: .88em; background: var(--surface-2);
+  border: 1px solid var(--border-soft); border-radius: 5px; padding: 1px 5px;
+}
+
+/* ---------- tables ---------- */
+.table-wrap { overflow-x: auto; margin: 16px 0; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 480px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border-soft); vertical-align: top; line-height: 1.7; }
+thead th { background: var(--surface-2); font-size: 12.5px; font-weight: 700; color: var(--text-2); white-space: nowrap; border-bottom: 1px solid var(--border); }
+tbody tr:last-child td { border-bottom: 0; }
+td.nowrap, th.nowrap { white-space: nowrap; }
+.t-num { font-variant-numeric: tabular-nums; }
+
+/* ---------- 5分類 grid ---------- */
+.grid5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 12px; margin: 18px 0; }
+.kind {
+  display: block; text-decoration: none; color: inherit;
+  border: 1px solid var(--border); border-top: 3px solid var(--cat);
+  border-radius: var(--radius); background: var(--surface); padding: 14px 15px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.kind:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.kind__name { font-weight: 800; font-size: 14.5px; margin-bottom: 4px; color: var(--cat); }
+.kind__key { font-size: 12.5px; color: var(--muted); line-height: 1.65; }
+
+/* ---------- timeline ---------- */
+.tl { position: relative; margin: 22px 0 8px; padding-left: 26px; }
+.tl::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+.tl__item { position: relative; margin: 0 0 18px; }
+.tl__item::before {
+  content: ""; position: absolute; left: -23px; top: 8px; width: 9px; height: 9px;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--cat, var(--accent));
+}
+.tl__item--major::before { background: var(--cat, var(--accent)); box-shadow: 0 0 0 3px var(--cat-soft, var(--accent-soft)); }
+.tl__date { font-size: 12px; font-weight: 700; color: var(--cat, var(--accent)); font-variant-numeric: tabular-nums; }
+.tl__name { font-weight: 700; font-size: 15px; margin: 1px 0 2px; }
+.tl__body { font-size: 13.5px; color: var(--text-2); line-height: 1.75; }
+
+/* ---------- Q&A ---------- */
+.qa { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); margin: 8px 0; overflow: hidden; }
+.qa > summary {
+  cursor: pointer; padding: 12px 16px; font-size: 14.5px; font-weight: 600; line-height: 1.7;
+  list-style: none; display: flex; gap: 10px; align-items: flex-start;
+}
+.qa > summary::-webkit-details-marker { display: none; }
+.qa > summary::before {
+  content: "Q"; flex: none; font-size: 11px; font-weight: 800; color: var(--accent);
+  background: var(--accent-soft); border-radius: 5px; padding: 2px 6px; margin-top: 4px; line-height: 1.3;
+}
+.qa > summary:hover { background: var(--surface-2); }
+.qa[open] > summary { border-bottom: 1px solid var(--border-soft); }
+.qa__a { padding: 12px 16px 14px 16px; font-size: 14px; color: var(--text-2); display: flex; gap: 10px; }
+.qa__a::before {
+  content: "A"; flex: none; font-size: 11px; font-weight: 800; color: #fff; background: var(--accent);
+  border-radius: 5px; padding: 2px 6px; margin-top: 4px; line-height: 1.3; height: fit-content;
+}
+:root[data-theme="dark"] .qa__a::before { color: #14151a; }
+.qa__a > div { min-width: 0; }
+.qa__a p { margin: 0 0 6px; }
+.qa__a p:last-child { margin: 0; }
+.qa-tools { display: flex; gap: 8px; margin: 16px 0 4px; }
+
+/* ---------- misc ---------- */
+.footnote { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
+.footer {
+  max-width: 1180px; margin: 0 auto; padding: 26px 20px 60px;
+  border-top: 1px solid var(--border); color: var(--muted); font-size: 12.5px;
+}
+.footer p { margin: 0 0 6px; }
+.backtop { display: inline-block; margin-top: 10px; font-size: 12.5px; }
+
+/* ---------- print ---------- */
+@media print {
+  :root { --bg: #fff; --surface: #fff; --surface-2: #fff; --border: #ccc; --border-soft: #ddd;
+          --text: #000; --text-2: #222; --muted: #555; --shadow: none; }
+  .topbar, .toc, .qa-tools, .backtop { display: none !important; }
+  .layout { display: block; max-width: none; padding: 0; }
+  section { page-break-inside: auto; padding-top: 22px; }
+  h2, h3 { page-break-after: avoid; }
+  .card, .callout, .table-wrap, .qa { page-break-inside: avoid; }
+  .qa__a { display: flex !important; }
+  a { color: inherit; text-decoration: none; }
+  body { font-size: 11pt; line-height: 1.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="brand">
+      <span class="brand__title">生成AIパスポート 勉強ノート</span>
+      <span class="brand__sub">5つの生成AI ＋ ChatGPTの歴史</span>
+    </div>
+    <span class="topbar__spacer"></span>
+    <button class="btn" id="themeBtn" type="button" aria-label="配色を切り替える">◐ 配色</button>
+    <button class="btn" id="printBtn" type="button">印刷 / PDF</button>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<div class="layout">
+
+  <nav class="toc" aria-label="目次">
+    <div class="toc__inner">
+      <p class="toc__label">目次</p>
+      <a href="#kinds">1. 生成AIの5分類</a>
+      <a href="#text" class="toc--sub">2. テキスト生成AI</a>
+      <a href="#image" class="toc--sub">3. 画像生成AI</a>
+      <a href="#music" class="toc--sub">4. 音楽生成AI</a>
+      <a href="#voice" class="toc--sub">5. 音声生成AI</a>
+      <a href="#video" class="toc--sub">6. 動画生成AI</a>
+      <a href="#compare">7. 5分類の横断まとめ</a>
+      <a href="#prosncons">8. メリットとデメリット</a>
+      <hr>
+      <a href="#chatgpt">9. ChatGPTとは</a>
+      <a href="#history">10. ChatGPTの歴史</a>
+      <hr>
+      <a href="#numbers">11. 数字・年号シート</a>
+      <a href="#traps">12. ひっかけ対策</a>
+      <a href="#quiz">13. 一問一答</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <div class="hero">
+      <h1>生成AIパスポート 勉強ノート</h1>
+      <p class="hero__lead">
+        テキスト・画像・音楽・音声・動画という<b>5つの生成AI</b>と、<b>ChatGPTの概要と歴史</b>にしぼった要点整理。
+        シラバス（第7シラバス／2026年2月試験より適用）の第2章「ChatGPT」と、第3章「生成AIができることと主なサービス」に対応する。
+      </p>
+      <div class="hero__meta">
+        <span class="chip">対象：第2章 ChatGPT ／ 第3章 各種の生成AI</span>
+        <span class="chip">本試験：60分・60問・四肢択一（一部複数選択）</span>
+        <span class="chip">1ページ完結（Ctrl+F で串刺し検索）</span>
+      </div>
+    </div>
+
+    <!-- ============================ 1 ============================ -->
+    <section id="kinds">
+      <h2><span class="num">1</span>生成AIの5分類</h2>
+      <p class="sec-lead">シラバス「生成AIができることと主なサービス」で挙げられている5つ。まずこの5つの名前と、それぞれの<b>核になる技術キーワード</b>をセットで覚える。</p>
+
+      <div class="grid5">
+        <a class="kind" href="#text"  style="--cat: var(--cat-text)">
+          <div class="kind__name">テキスト生成AI</div>
+          <div class="kind__key">NLP ／ LLM<br>ChatGPT・Claude・Gemini</div>
+        </a>
+        <a class="kind" href="#image" style="--cat: var(--cat-img)">
+          <div class="kind__name">画像生成AI</div>
+          <div class="kind__key">GAN・VAE・CNN<br>→ 現在は<b>拡散モデル</b>が主流</div>
+        </a>
+        <a class="kind" href="#music" style="--cat: var(--cat-music)">
+          <div class="kind__name">音楽生成AI</div>
+          <div class="kind__key">MIDI ／ RNN<br>リスナーのフィードバック</div>
+        </a>
+        <a class="kind" href="#voice" style="--cat: var(--cat-voice)">
+          <div class="kind__name">音声生成AI</div>
+          <div class="kind__key"><b>教師あり学習</b> ／ TTS<br>Eleven Labs・リップシンク</div>
+        </a>
+        <a class="kind" href="#video" style="--cat: var(--cat-video)">
+          <div class="kind__name">動画生成AI</div>
+          <div class="kind__key">GAN・VAE ／ フレーム間の一貫性は RNN<br>Sora・Veo 3</div>
+        </a>
+      </div>
+
+      <div class="callout">
+        <p class="callout__title">まず押さえる</p>
+        <p>5分類は「テキスト・画像・音楽・音声・動画」。<b>音楽と音声は別物</b>として数える点に注意（まとめて「音」ではない）。
+        選択肢に「プログラム生成AI」「翻訳生成AI」などが混ざったら、それは5分類の枠には入っていない。</p>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 2 ============================ -->
+    <section id="text" style="--cat: var(--cat-text); --cat-soft: var(--cat-text-soft)">
+      <h2><span class="num">2</span>テキスト生成AI</h2>
+      <p class="sec-lead">自然言語処理と機械学習の技術を利用して、文章やテキストデータを自動的に生成する技術。</p>
+
+      <h3>仕組みと用語</h3>
+      <div class="card">
+        <h4>NLP（Natural Language Processing／自然言語処理）</h4>
+        <p>コンピュータに<span class="kw">人間の言葉を理解させる</span>ための技術。生成AI専用の技術ではなく、
+        翻訳ソフトによる日本語訳や、スマートスピーカーが人の話を理解して答える処理にも同じくNLPが使われている。</p>
+
+        <h4>LLM（Large Language Model／大規模言語モデル）</h4>
+        <p><span class="kw">非常に大規模なデータセットで学習された自然言語処理モデル</span>のこと。
+        テキスト生成AIの中身はこのLLMで、もっともよく知られている代表例が OpenAI の <b>ChatGPT</b>。</p>
+      </div>
+
+      <h3>主なサービスと提供元</h3>
+      <p>「サービス名 ↔ 提供している会社」の組み合わせはそのまま出題される。ここは丸暗記でよい。</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">サービス</th><th class="nowrap">提供元</th><th>特徴</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>ChatGPT</b></td><td class="nowrap">OpenAI</td>
+              <td>テキスト生成AIの代表例。2022年11月公表。詳細は <a href="#chatgpt">9章・10章</a>。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Claude</b></td><td class="nowrap">Anthropic</td>
+              <td>OpenAI の有力な競合。あらかじめ定めた原則に沿って「無害・役立つ・正直」を保つ <b>Constitutional AI</b> を採用。
+              2024年3月の Claude 3 から Haiku（超高速・低コスト）／Sonnet（バランス）／Opus（最上位・複雑な推論）の三種類構成。
+              文書やコードを別ウィンドウで並行生成・編集できる <b>Artifacts</b> 機能を持つ。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Gemini</b></td><td class="nowrap">Google<br>（Google DeepMind）</td>
+              <td>2023年12月の初代から 1.5 → 2.0 → 2.5 と進化。最初からテキスト・画像・音声・動画・コードを同じモデルで扱うよう学習された
+              <b>ネイティブなマルチモーダル設計</b>が特徴。2.5 Pro は超長コンテキスト（最大104万トークン）、2.5 Flash は速度とコスト効率重視、Nano は端末上で動く軽量版。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Copilot</b></td><td class="nowrap">Microsoft</td>
+              <td>Word・Excel・Outlook・Teams などに組み込まれ、文章作成・データ整理・メール支援・会議要約まで横断的に支援する AI ブランド。
+              基盤には OpenAI のモデル（GPT-5）が使われる。Copilot Studio／Copilot+ PC（Recall）／GitHub Copilot／Security Copilot などの種類がある。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p class="callout__title">試験ポイント</p>
+        <ul class="tight">
+          <li><b>ChatGPT＝OpenAI ／ Claude＝Anthropic ／ Gemini＝Google</b>。この3つの入れ替えが定番の誤答肢。</li>
+          <li>NLP の正式名称は <b>Natural Language Processing</b>（Neural… ではない）。</li>
+          <li>LLM の説明は「大規模なデータセットで学習された自然言語処理モデル」。<b>「小規模で特化した」は誤り</b>。</li>
+        </ul>
+      </div>
+
+      <div class="callout callout--warn">
+        <p class="callout__title">テキスト生成AIが不得意なこと</p>
+        <p>シラバス第5章の項目だが、テキスト生成AIの性質としてセットで覚えると効く。
+        <b>①正確な文字数の指定 ②計算 ③最新の情報 ④芸術の批評</b>。
+        「文字数はきっちり守れる」「計算が得意」という肢は誤り。</p>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 3 ============================ -->
+    <section id="image" style="--cat: var(--cat-img); --cat-soft: var(--cat-img-soft)">
+      <h2><span class="num">3</span>画像生成AI</h2>
+      <p class="sec-lead">コンピュータが画像を生成するための技術。<b>手法の変遷（GAN・VAE → 拡散モデル）</b>が最頻出。</p>
+
+      <h3>学習の流れと前処理</h3>
+      <ol>
+        <li>インターネット上にある<b>大量の画像データを収集</b>し、学習に使用する。</li>
+        <li>収集した画像は<b>前処理</b>をして、モデルに適した形式に変換する。</li>
+      </ol>
+      <div class="callout">
+        <p class="callout__title">前処理の3手法（そのまま出る）</p>
+        <p><span class="kw">画像のリサイズ</span> ／ <span class="kw">正規化</span> ／ <span class="kw">データの水増し</span></p>
+        <p class="footnote">リサイズ＝サイズを揃える。正規化＝画素値のスケールを揃える。データの水増し（データ拡張）＝反転・回転などで学習データの量と多様性を増やす。</p>
+      </div>
+
+      <h3>3つの手法</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">手法</th><th class="nowrap">正式名称</th><th>仕組み</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>① GAN</b></td>
+              <td class="nowrap">敵対的生成ネットワーク<br>Generative Adversarial Network</td>
+              <td><b>生成器（ジェネレータ）と識別器（ディスクリミネータ）を競わせる</b>ことで、高品質な画像を生成する。
+              生成器は「本物らしい偽物」を作ろうとし、識別器は「本物か偽物か」を見分けようとする。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>② VAE</b></td>
+              <td class="nowrap">変分自己符号化器<br>Variational Auto-Encoder</td>
+              <td><b>エンコーダとデコーダ</b>からなる。<br>
+              ・<b>エンコーダ</b>＝情報を圧縮し、<b>潜在ベクトル</b>（特徴を要約した情報）にする<br>
+              ・<b>デコーダ</b>＝潜在ベクトルから元のデータに近いものを復元する</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>③ CNN</b></td>
+              <td class="nowrap">畳み込みニューラルネットワーク<br>Convolutional Neural Network</td>
+              <td>画像認識・画像処理に強いモデル。画像の局所的な特徴から、全体的な特徴を抽出できる。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>現在の主流：ディフュージョン（拡散）モデル</h3>
+      <div class="card">
+        <p>GAN と VAE 中心から移行し、<span class="kw">現在はディフュージョン（拡散）モデルが主流</span>。
+        <b>ノイズを段階的に「除去」</b>していくことで、学習の安定と超高精細を両立する。</p>
+        <p class="footnote">補足：拡散モデルは学習の段階では「元画像にノイズを加えていく過程」を学ぶが、
+        画像を作る（生成する）ときはその逆で、ノイズだらけの状態から段階的にノイズを取り除いていく。
+        試験で問われるのは<b>「ノイズを段階的に除去して画像を完成させる」</b>側なので、こちらを答えにする。</p>
+      </div>
+
+      <h3>自己回帰型 Transformer の組み合わせ</h3>
+      <div class="card">
+        <p>拡散モデルに加えて、<b>自己回帰型 Transformer（自己回帰モデル）</b>を組み合わせる方式が登場した。
+        <span class="kw">画像をトークン化して順次生成する</span>ことで、
+        <b>看板の文字や細線などの細部も破綻なく</b>表現できるようになった。</p>
+        <p>OpenAI の <b>Image Generation</b>（2023年10月発表）がこの方式で、左上から右下へ順に描いていく。
+        従来の DALL·E や Stable Diffusion が使う拡散モデルとは別方式である点が対比で問われる。→ <a href="#history">10章の年表</a></p>
+      </div>
+
+      <div class="callout">
+        <p class="callout__title">試験ポイント</p>
+        <ul class="tight">
+          <li>「現在は GAN と VAE が主流」は<b>誤り</b>。<b>拡散モデルが主流</b>。</li>
+          <li>「拡散モデルはノイズを段階的に<b>加えて</b>いく」は誤り。生成の説明としては<b>除去</b>。</li>
+          <li>VAE の<b>エンコーダ＝圧縮して潜在ベクトルへ／デコーダ＝復元</b>。役割を入れ替えた肢が定番。</li>
+          <li>前処理3つ（リサイズ・正規化・水増し）に「ノイズ除去」「トークン化」などを混ぜた肢は誤り。</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 4 ============================ -->
+    <section id="music" style="--cat: var(--cat-music); --cat-soft: var(--cat-music-soft)">
+      <h2><span class="num">4</span>音楽生成AI</h2>
+      <p class="sec-lead">コンピュータが音楽を作り出すための技術。<b>MIDI・RNN・リスナーのフィードバック</b>の3語が軸。</p>
+
+      <h3>学習と生成のサイクル</h3>
+      <div class="card">
+        <ol>
+          <li>AI は<b>既存の音楽データセット</b>から学習する。データセットには
+          <span class="kw">MIDIファイル</span>（デジタル音楽のインターフェース規格）等の音楽データが含まれる。</li>
+          <li>シーケンス（連続した）データの処理に長けている <span class="kw">RNN</span> 等を用いて、データセットの情報を<b>水増し</b>する。</li>
+          <li>それをもとに音楽を生成し、<b>人間のリスナーからのフィードバック</b>を受ける。</li>
+          <li>そのフィードバックを<span class="kw">新たな学習データとしてデータセットに追加</span>することで、
+          <b>より好まれる音楽を生成する能力を獲得していく</b>。</li>
+        </ol>
+      </div>
+      <p class="footnote">RNN（Recurrent Neural Network／回帰型ニューラルネットワーク）＝過去の情報を記憶しながら新しい入力を処理する特性があり、
+      音楽・音声・動画のような「順番に意味がある」連続データの扱いに向く。音楽生成AIと動画生成AIの両方で登場する。</p>
+
+      <div class="callout">
+        <p class="callout__title">試験ポイント</p>
+        <ul class="tight">
+          <li>学習データの代表として <b>MIDIファイル</b> が挙がる。「MP3のみ」「楽譜画像のみ」は誤り。</li>
+          <li>水増しに使うのは <b>RNN 等</b>（シーケンスデータに強い）。CNN や GAN と入れ替えた肢に注意。</li>
+          <li>好まれる音楽を作れるようになる仕組みは<b>リスナーのフィードバックをデータセットに追加</b>していくこと。</li>
+        </ul>
+      </div>
+
+      <div class="callout callout--warn">
+        <p class="callout__title">デメリット側でも問われる</p>
+        <p>生成AIのデメリットの1つ「<b>その業界の職業への影響</b>」の例として、音楽生成AIが挙げられている。
+        <b>「音楽家に対する需要が減少する可能性がある」</b>が正しい向き。「需要が増加するとされている」は誤り。</p>
+      </div>
+
+      <p class="footnote">参考（試験範囲外）：実サービスとしては Suno、Udio、Google の MusicLM などがある。書籍・シラバスでは音楽生成AIの具体的サービス名は指定されていないので、覚える必要はない。</p>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 5 ============================ -->
+    <section id="voice" style="--cat: var(--cat-voice); --cat-soft: var(--cat-voice-soft)">
+      <h2><span class="num">5</span>音声生成AI</h2>
+      <p class="sec-lead">コンピュータが音声を生成するための技術。<b>「教師あり学習」</b>と <b>TTS</b> が最重要ワード。</p>
+
+      <h3>学習のしかた</h3>
+      <div class="card">
+        <p>大量の音声データを使用して、ディープラーニングモデルをトレーニングする。
+        このトレーニングには、一般的に <span class="kw">教師あり学習</span> が用いられる。</p>
+        <p class="footnote">※ここが定番のひっかけどころ。「強化学習が用いられる」「教師なし学習のみ」は<b>誤り</b>。</p>
+      </div>
+
+      <h3>主な技術・サービス</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">名称</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>TTS</b><br><span class="footnote">Text-to-Speech</span></td>
+              <td><b>テキストを自然な音声へ変換する技術</b>。
+              <b>多言語・多話者・感情表現</b>に対応し、読み上げやナレーションに利用される。OpenAI も TTS を提供している。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Eleven Labs</b></td>
+              <td><b>少量のサンプルから声色を再現</b>できる高品質な TTS。
+              感情や話速の制御、多言語合成に対応し、制作現場で広く利用されている。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>リップシンク</b></td>
+              <td>特定の人物画像の<b>口の動きを音声に合わせて動かす</b>技術。近年進化し、よりリアルで自然な表現が可能になった。
+              エンターテインメントからビジネスまで活用が広がっている。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p class="callout__title">試験ポイント</p>
+        <ul class="tight">
+          <li>トレーニングは一般に <b>教師あり学習</b>。</li>
+          <li>TTS ＝ <b>Text-to-Speech</b>（テキスト→音声）。逆向きの「音声→テキスト」は STT／音声認識で別物。</li>
+          <li>「音声生成AIは感情表現に対応できない」は<b>誤り</b>。TTS も Eleven Labs も感情表現・感情制御に対応する。</li>
+          <li><b>音楽生成AI（音楽を作る）と音声生成AI（人の声を作る）を混同しない</b>。</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 6 ============================ -->
+    <section id="video" style="--cat: var(--cat-video); --cat-soft: var(--cat-video-soft)">
+      <h2><span class="num">6</span>動画生成AI</h2>
+      <p class="sec-lead">コンピュータが<b>静止画像を連続的に結合して</b>動画を生成する技術。<b>フレーム間の一貫性</b>が鍵。</p>
+
+      <h3>仕組み</h3>
+      <div class="card">
+        <ol>
+          <li>大量の動画データを収集する。</li>
+          <li>AI が処理しやすいように<b>フレームごとに分割</b>し、前処理する。</li>
+          <li>主な訓練手法には <span class="kw">GAN</span> や <span class="kw">VAE</span> がある。</li>
+          <li>各<b>フレーム間の一貫性を保つことが重要</b>で、連続性データの処理に適する <span class="kw">RNN</span> が利用される。</li>
+        </ol>
+      </div>
+
+      <h3>代表的なモデル</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">モデル</th><th class="nowrap">提供元 / 発表</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>Sora</b></td>
+              <td class="nowrap">OpenAI<br>2024年2月</td>
+              <td>文章や画像を入力すると動画を生成する。発表時は<b>最長1分間の動画を生成できる可能性のあるモデル</b>として大きな注目を集めたが、
+              <b>製品版では最長20秒・最大1080p（フルHD）</b>。教材づくりや広告の試作、研修シミュレーション素材などに活用されている。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Veo 3</b></td>
+              <td class="nowrap">Google DeepMind<br>2025年5月</td>
+              <td><b>超高精細映像</b>を生成し、さらに<b>環境音やセリフ等の音声も同時に合成</b>できるのが特徴。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p class="callout__title">試験ポイント</p>
+        <ul class="tight">
+          <li>フレーム間の一貫性を保つのは <b>RNN</b>。訓練手法は <b>GAN・VAE</b>。役割を混ぜた肢に注意。</li>
+          <li><b>Sora＝2024年2月・OpenAI・最長20秒/1080p</b>。「1分」は発表当時の注目点で、製品版は20秒。</li>
+          <li><b>Veo 3＝Google DeepMind・2025年5月・音声も同時合成</b>。Sora と提供元を入れ替えた肢が出る。</li>
+          <li>デメリット側では「AI生成動画は<b>映像の連続性や音と映像の同期</b>の点で人間の手作業に品質が劣る可能性」が正しい向き。
+          「常に高品質」は誤り。</li>
+        </ul>
+      </div>
+
+      <div class="callout callout--warn">
+        <p class="callout__title">関連：ディープフェイク（深層偽造）</p>
+        <p>ディープラーニングや生成AIを利用して非常にリアルなコンテンツを作り、
+        <b>人を故意に騙すことを目的として</b>使用される技術。映像内の人物の顔を別人に差し替えたり、既存の映像に表情や動きを追加したりできる。
+        鑑識能力を超えるほど高品質なフェイク映像が作られることもあり、
+        <b>偽情報（ディスインフォメーション）の拡散</b>という社会的問題を引き起こしている。</p>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 7 ============================ -->
+    <section id="compare">
+      <h2><span class="num">7</span>5分類の横断まとめ</h2>
+      <p class="sec-lead">直前に見返す用。「どの生成AIに、どの技術キーワードが結びつくか」だけを1枚にした。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th class="nowrap">種類</th><th class="nowrap">学習データ</th><th>中心となる技術</th><th class="nowrap">名前が挙がるサービス</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>テキスト</b></td>
+              <td class="nowrap">大規模なテキスト</td>
+              <td><b>NLP＋機械学習</b>／実体は <b>LLM</b></td>
+              <td class="nowrap">ChatGPT・Claude・Gemini</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>画像</b></td>
+              <td class="nowrap">大量の画像<br><span class="footnote">前処理＝リサイズ・正規化・水増し</span></td>
+              <td>GAN・VAE・CNN → <b>拡散モデルが主流</b>／<b>自己回帰型 Transformer</b> で細部も破綻なく</td>
+              <td class="nowrap">DALL·E・Stable Diffusion<br>Image Generation</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>音楽</b></td>
+              <td class="nowrap"><b>MIDI</b> 等の音楽データ</td>
+              <td><b>RNN</b> で水増し ＋ <b>リスナーのフィードバック</b>を再学習</td>
+              <td class="nowrap">（指定なし）</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>音声</b></td>
+              <td class="nowrap">大量の音声データ</td>
+              <td><b>教師あり学習</b>のディープラーニング／<b>TTS</b>・リップシンク</td>
+              <td class="nowrap">OpenAI TTS・Eleven Labs</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>動画</b></td>
+              <td class="nowrap">大量の動画<br><span class="footnote">フレームごとに分割</span></td>
+              <td>訓練は <b>GAN・VAE</b>／フレーム間の一貫性は <b>RNN</b></td>
+              <td class="nowrap">Sora・Veo 3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p class="callout__title">RNN が出てくるのは2か所</p>
+        <p><b>音楽生成AI</b>（データセットの水増し）と <b>動画生成AI</b>（フレーム間の一貫性）。
+        どちらも「連続したデータ＝シーケンスデータ」を扱うため、という理由まで結びつけて覚えると取り違えない。</p>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 8 ============================ -->
+    <section id="prosncons">
+      <h2><span class="num">8</span>メリットとデメリット</h2>
+      <p class="sec-lead">5分類とセットで出題される。<b>「〜が自動的に保証される／不要になる」と書いてある肢は、ほぼ誤り</b>と考えてよい。</p>
+
+      <h3>メリット（5つ）</h3>
+      <div class="card">
+        <ol class="tight">
+          <li><b>作業効率の向上</b> — 短時間で多くのコンテンツを生成でき、作成やタスクの自動化が進む。</li>
+          <li><b>補完と拡張が可能</b> — 与えられたデータの内容を理解し、関連情報を補完・拡張できる。不足部分を補うこともできる。</li>
+          <li><b>新たなアイデア・デザインの生成</b> — 既存コンテンツから情報収集・分析を行い、新しい案を生み出せる。</li>
+          <li><b>アクセシビリティの向上</b> — 専門知識がなくても、音楽・画像・動画の制作やプログラミングコードの作成・修正ができる。</li>
+          <li><b>言語の壁の克服</b> — 異なる言語間での文章・音声のやり取りが可能になる。</li>
+        </ol>
+      </div>
+
+      <h3>デメリット（6つ）</h3>
+      <div class="card">
+        <ol class="tight">
+          <li><b>虚偽の情報や不適切なコンテンツの生成</b> — <b>信頼性や正確性は人間がチェックする必要がある</b>。</li>
+          <li><b>偏見・差別的なコンテンツの生成</b> — <b>学習データに偏りがある場合</b>に起こる。倫理面への留意が必要。</li>
+          <li><b>プライバシー侵害等</b> — データ入力時に<b>個人情報や機微（センシティブ）情報を含めない</b>配慮が必要。</li>
+          <li><b>著作権等の知的財産権侵害</b> — 著作権・特許権・商標権・意匠権を侵害する可能性があり、権利関係のチェックが必要。</li>
+          <li><b>その業界の職業への影響</b> — 例：音楽生成AIの活用により、人間の音楽家への需要が減少する可能性。</li>
+          <li><b>質の低下</b> — 例：AI生成動画は、映像の連続性や音と映像の同期の点で、人間の手作業の制作物に品質が劣る可能性。</li>
+        </ol>
+      </div>
+
+      <div class="callout callout--warn">
+        <p class="callout__title">誤答肢の見分け方</p>
+        <ul class="tight">
+          <li>「生成物の正確性が<b>自動的に担保</b>されるため、人間による確認が不要」→ 誤り</li>
+          <li>「生成物の著作権が<b>自動的に利用者に帰属</b>するため、権利処理は不要」→ 誤り</li>
+          <li>「学習データが偏っていても、AI が中立に補正する」→ 誤り</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 9 ============================ -->
+    <section id="chatgpt" style="--cat: var(--cat-gpt); --cat-soft: var(--cat-gpt-soft)">
+      <h2><span class="num">9</span>ChatGPTとは</h2>
+      <p class="sec-lead">OpenAI が開発した一連の自然言語処理モデル。<b>2022年11月に公表</b>された。</p>
+
+      <h3>名前の意味</h3>
+      <div class="card">
+        <div class="table-wrap" style="margin:0; border:0;">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td class="nowrap"><b>Chat</b></td><td>対話型</td></tr>
+              <tr><td class="nowrap"><b>G</b></td><td><b>Generative</b>（生成）</td></tr>
+              <tr><td class="nowrap"><b>P</b></td><td><b>Pre-trained</b>（事前学習）</td></tr>
+              <tr><td class="nowrap"><b>T</b></td><td><b>Transformer</b>（Transformerモデル）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p>チャットのやり取りが機械的ではなく、<b>人間と会話しているようにごく自然に展開される</b>のが特徴。</p>
+
+      <div class="callout">
+        <p class="callout__title">ここを間違えない</p>
+        <ul class="tight">
+          <li>ChatGPT は<b>公表される数年前から複数のバージョンが存在</b>する。「公表と同時に開発が始まった」は誤り。</li>
+          <li>2022年11月にリリースされた ChatGPT は <b>GPT-3.5 をベース</b>にしている（GPT-4 ではない）。</li>
+          <li>正確には、GPT-3.5 を<b>対話向けにファインチューニング</b>した <b>Web アプリケーションサービス</b>が ChatGPT。</li>
+        </ul>
+      </div>
+
+      <h3>あわせて覚える用語</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">用語</th><th>意味</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap"><b>データセット</b></td><td>AI が学習を行う際に必要な<b>学習データ群</b>。</td></tr>
+            <tr><td class="nowrap"><b>ファインチューニング</b></td><td><b>特定の用途のためにモデルを微調整</b>すること。</td></tr>
+            <tr><td class="nowrap"><b>RLHF</b><br><span class="footnote">Reinforcement Learning<br>from Human Feedback</span></td>
+                <td><b>強化学習の一手法</b>で、<b>人間のフィードバックに基づいて出力を矯正</b>する方法。
+                人間がモデルの出力を評価し、その評価をもとにモデルが「より適切な回答」を学習していく。</td></tr>
+            <tr><td class="nowrap"><b>アライメント</b><br><span class="footnote">Alignment</span></td>
+                <td>モデルを<b>人間の求める適切な回答を出すように調整すること</b>。RLHF はそのための手段。</td></tr>
+            <tr><td class="nowrap"><b>ハルシネーション</b><br><span class="footnote">Hallucination＝幻覚</span></td>
+                <td>モデルが<b>不正確あるいは誤った情報を、あたかも正確・正しい情報のように生成すること</b>。</td></tr>
+            <tr><td class="nowrap"><b>マルチモーダル</b></td>
+                <td>モーダル＝AI との関係では「<b>入力方法</b>」の意味。マルチモーダルは
+                <b>テキスト・画像・音声・動画など異なる種類のデータを一度に処理できる AI 技術</b>。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 10 ============================ -->
+    <section id="history" style="--cat: var(--cat-gpt); --cat-soft: var(--cat-gpt-soft)">
+      <h2><span class="num">10</span>ChatGPTの歴史</h2>
+      <p class="sec-lead">GPT-1 から GPT-5 まで、そして Sora・Operator・Codex まで。<b>「モデル名 ↔ 発表年月 ↔ 特徴」</b>の3点セットで問われる。</p>
+
+      <h3>年表</h3>
+      <div class="tl">
+        <div class="tl__item">
+          <div class="tl__date">2018年6月</div>
+          <div class="tl__name">GPT-1</div>
+          <div class="tl__body">非常に自然な文章の生成が可能に。パラメータ数 約1億1,700万。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2019年2月</div>
+          <div class="tl__name">GPT-2</div>
+          <div class="tl__body">性能が高く、誤用・悪用の危険性から<b>当初はフルモデルの公開が控えられた</b>。約15億。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2020年5月</div>
+          <div class="tl__name">GPT-3</div>
+          <div class="tl__body">従来よりはるかに大規模な<b>約1,750億パラメータ</b>。微調整なしで幅広いNLPタスクが可能に。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2022年1月</div>
+          <div class="tl__name">InstructGPT ／ GPT-3.5</div>
+          <div class="tl__body">GPT-3 をベースに <b>RLHF</b> を採用した InstructGPT が登場。GPT-3.5 も同じく RLHF を採用。約3,550億。</div>
+        </div>
+        <div class="tl__item tl__item--major">
+          <div class="tl__date">2022年11月</div>
+          <div class="tl__name">ChatGPT 公表 ★</div>
+          <div class="tl__body">GPT-3.5 を対話向けにファインチューニングした Web アプリケーションサービスとしてリリース。</div>
+        </div>
+        <div class="tl__item tl__item--major">
+          <div class="tl__date">2023年3月</div>
+          <div class="tl__name">GPT-4 ／ Code Interpreter（発表）</div>
+          <div class="tl__body">約1兆7,600億パラメータとされる。学習データは GPT-3.5 と同じく<b>2021年9月まで</b>。
+          Code Interpreter は同年3月発表・<b>7月実装</b>。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2023年10月</div>
+          <div class="tl__name">Image Generation</div>
+          <div class="tl__body">画像生成AI。拡散モデルではなく<b>自己回帰方式</b>（左上から右下へ逐次に描く）。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2023年11月</div>
+          <div class="tl__name">GPTs</div>
+          <div class="tl__body">用途に合わせてカスタマイズした「<b>オリジナルの ChatGPT</b>」を作れる機能。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2024年2月</div>
+          <div class="tl__name">Sora</div>
+          <div class="tl__body">動画生成AI。文章や画像を入力すると動画を生成する。</div>
+        </div>
+        <div class="tl__item tl__item--major">
+          <div class="tl__date">2024年5月</div>
+          <div class="tl__name">GPT-4o</div>
+          <div class="tl__body">テキスト・画像・音声を組み合わせて処理できる<b>オムニモーダルモデル</b>。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2024年9月</div>
+          <div class="tl__name">GPT-o1</div>
+          <div class="tl__body">速さより<b>推論の質</b>を重視した最初のリーズニングモデル。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2025年1月</div>
+          <div class="tl__name">Operator</div>
+          <div class="tl__body">画面を解析し、クリックや入力を自動で実行する<b>AIエージェント</b>。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2025年4月</div>
+          <div class="tl__name">GPT-o3 ／ GPT-o4 ／ GPT-4.1</div>
+          <div class="tl__body">推論強化の o3、ツールを自律活用する o4、開発実務向けの 4.1 が同じ2025年4月に並ぶ。</div>
+        </div>
+        <div class="tl__item">
+          <div class="tl__date">2025年5月</div>
+          <div class="tl__name">Codex</div>
+          <div class="tl__body">バグ修正・機能追加・テストまで自律的に支援する、ソフトウェア開発向け AI エージェント（研究プレビュー）。</div>
+        </div>
+        <div class="tl__item tl__item--major">
+          <div class="tl__date">2025年8月</div>
+          <div class="tl__name">GPT-5</div>
+          <div class="tl__body">推論力とスピードが大幅に進化。<b>GPT-5 Thinking</b> では従来より深い思考を取り入れ、誤情報が大幅に減少。</div>
+        </div>
+      </div>
+
+      <h3>パラメータ数（数字はそのまま出る）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">モデル</th><th class="nowrap">発表</th><th class="nowrap t-num">パラメータ数</th><th>そのモデルで変わったこと／残った課題</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>GPT-1</b></td><td class="nowrap">2018年6月</td><td class="nowrap t-num">約1億1,700万</td>
+              <td>インターネットテキストの大規模データセットで学習し、NLP タスクが実行可能に。
+              <span class="footnote">課題：文脈の理解が短絡的で、<b>長期的な会話の文脈を保持する能力が不十分</b>。</span></td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-2</b></td><td class="nowrap">2019年2月</td><td class="nowrap t-num">約15億</td>
+              <td>GPT-1 の<b>約10倍</b>のデータセットで学習。より人間らしく、適切な文脈のテキストを生成。
+              <span class="footnote">誤用・悪用リスクの管理体制が十分でなく、<b>当初は一部のバージョンが非公開</b>とされた。</span></td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-3</b></td><td class="nowrap">2020年5月</td><td class="nowrap t-num">約1,750億</td>
+              <td><b>微調整なしで幅広い NLP タスクを実行可能</b>に。
+              <span class="footnote">課題：直感的な理解や外部知識へのアクセスを欠き、誤った回答も残った。</span></td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-3.5</b></td><td class="nowrap">2022年1月</td><td class="nowrap t-num">約3,550億</td>
+              <td><b>RLHF を採用</b>し、人間の一定の価値観に基づく範囲内で動作するよう設計された点が GPT-3 との大きな違い。
+              <span class="footnote">2022年11月、これを対話向けにファインチューニングした ChatGPT がリリース。</span></td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-4</b></td><td class="nowrap">2023年3月</td><td class="nowrap t-num">約1兆7,600億</td>
+              <td>ハルシネーション減少・マルチモーダル・多言語精度向上。
+              <span class="footnote">学習データの範囲は GPT-3.5 と同じ<b>2021年9月まで</b>。</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>GPT-3 から GPT-3.5 へ ── なぜ RLHF が必要だったか</h3>
+      <div class="card">
+        <p>GPT-3 で高精度な文章生成は可能になったが、学習データであるインターネット上の文章には
+        <b>攻撃的な表現や誤った情報</b>も含まれる。そのまま学習すると、そうした内容を出力するモデルができてしまう。</p>
+        <p>そこで 2022年1月、この問題を解決すべく <b>InstructGPT</b> がリリースされた。GPT-3 をベースに
+        <b>RLHF</b>（人間のフィードバックに基づいて出力を矯正する強化学習の手法）を採用したモデルである。
+        こうして<b>モデルを人間の求める適切な回答を出すように調整すること</b>を <b>アライメント</b> という。</p>
+        <p style="margin-bottom:0">GPT-3.5 も同じく RLHF を採用しており、<b>人間の一定の価値観に基づく範囲内で動作するように設計されている</b>点が GPT-3 との大きな違い。</p>
+      </div>
+
+      <h3>GPT-4 の3つの性能向上</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">向上した性能</th><th>内容と数字</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>ハルシネーションの減少</b></td>
+              <td>GPT-4 でもハルシネーションは<b>生じる</b>が、その割合は GPT-3.5 と比べて
+              <span class="kw">19〜29% 程度減少</span>している。<b>「完全に解消された」は誤り</b>。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>マルチモーダル</b></td>
+              <td>これまでは文章のみで指示し文章を出力していたが、
+              <b>文章と画像を合わせて指示を出し、データを生成する</b>ことが可能になった。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>多言語の文章生成精度</b></td>
+              <td>GPT-3.5 では英語に比べ日本語の精度が低かったが、GPT-4 では
+              <span class="kw">26言語のうち日本語を含む24言語</span>で、GPT-3.5 の<b>英語</b>の出力精度を上回った。<br>
+              <span class="t-num">※ GPT-3.5 の英語＝<b>70.1%</b> ／ GPT-4 の日本語＝<b>79.9%</b></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>マルチモーダル と オムニモーダル の違い</h3>
+      <div class="card">
+        <p><b>GPT-4o</b>（2024年5月）の「o」は <b>オムニ（omni＝すべての）</b> の意味。</p>
+        <ul>
+          <li><b>マルチモーダルモデル</b>＝複数種類のデータを扱えるが、通常は<b>それぞれ個別に処理</b>し、結果をまとめて応答する。</li>
+          <li><b>オムニモーダルモデル</b>＝テキスト・画像・音声などを<b>継ぎ目なく（シームレスに）統合して同時に理解・分析</b>する。</li>
+        </ul>
+        <p style="margin-bottom:0">特に音声入力への応答が速く、<b>最短232ミリ秒・平均320ミリ秒</b>で応答できる。
+        これは人が会話で返事をするスピードに非常に近い。</p>
+      </div>
+
+      <h3>リーズニングモデル（o シリーズ）と最新モデル</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">モデル</th><th class="nowrap">発表</th><th>特徴</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>GPT-o1</b></td><td class="nowrap">2024年9月</td>
+              <td><b>速く答えるより推論の質を重視</b>する設計。先にじっくり考えてから応答するため、数学の証明・アルゴリズム設計など論理性の高い課題に強い。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-o3</b></td><td class="nowrap">2025年4月</td>
+              <td>o1 より<b>さらに長く熟考</b>させる設計。難しい数学とコード設計での正答率が向上。o3-mini／o3／o3-pro の三種類。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-o4</b></td><td class="nowrap">2025年4月</td>
+              <td>熟考型。<b>Web検索・Python実行・画像解析などのツールを自律的に組み合わせて</b>課題を検討する。o4-mini／o4-mini-high がある。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-4.1</b></td><td class="nowrap">2025年4月</td>
+              <td><b>開発実務向けの改良版</b>。超長文や大規模コードを一度に扱え、コーディングとバグ修正の精度・速度が向上。
+              標準版／mini／nano の三種類（nano はリアルタイム処理向け）。<b>推論特化モデルではない</b>点に注意。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPT-5</b></td><td class="nowrap">2025年8月</td>
+              <td>博士レベルの難問にも対応でき、<b>推論力とスピードが大幅に進化</b>。標準版／<b>GPT-5 Thinking</b>／<b>GPT-5 Pro</b> の三種類。
+              Thinking と Pro は従来より深く思考する設計で、<b>ハルシネーションが大幅に減少</b>。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>ChatGPT 周辺の機能・サービス</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">名称</th><th class="nowrap">発表</th><th class="nowrap">種類</th><th>できること</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="nowrap"><b>Code Interpreter</b></td><td class="nowrap">2023年3月<br><span class="footnote">7月実装</span></td>
+              <td class="nowrap">機能</td>
+              <td>「コードの通訳者」の意味。ChatGPT が <b>Python</b> でソースコードを書いて実行する。
+              <b>データ分析／グラフ作成／数学の計算／ファイルの読み書き</b>ができる。
+              <span class="footnote">※「Web を自動巡回してニュースを収集する」は Code Interpreter の機能ではない。</span></td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>GPTs</b></td><td class="nowrap">2023年11月</td><td class="nowrap">機能</td>
+              <td><b>Generative Pre-trained Transformers</b> の略。用途に合わせた「オリジナルの ChatGPT」を作れる。
+              ①特定の振る舞い（キャラクターや役割）の設定 ②特定のファイルの参照 ③外部 API との連携。
+              作った GPT は <b>GPT ストア</b>で公開・利用できる。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Image Generation</b></td><td class="nowrap">2023年10月</td><td class="nowrap">画像生成AI</td>
+              <td>従来の DALL·E や Stable Diffusion の<b>拡散モデルとは異なり</b>、<b>左上から右下へ順に描く自己回帰型</b>。
+              文字入りや複雑なレイアウトに強く、広告制作などに活用できる。参照画像に合わせた生成にも対応。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Sora</b></td><td class="nowrap">2024年2月</td><td class="nowrap">動画生成AI</td>
+              <td>文章や画像から映像を作る。<b>最長20秒・最大1080p（フルHD）</b>。教材作りや広告の試作などで活用。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Operator</b></td><td class="nowrap">2025年1月</td><td class="nowrap">AIエージェント</td>
+              <td>Web 画面を解析しながら<b>クリックや入力を自動で行う</b>。検索からフォーム記入、購入や予約の確定までを代行する。</td>
+            </tr>
+            <tr>
+              <td class="nowrap"><b>Codex</b></td><td class="nowrap">2025年5月</td><td class="nowrap">AIエージェント</td>
+              <td>ソフトウェア開発を支援する。バグ修正や新機能追加の提案から実装・テスト実行・結果整理までを一貫して行う。
+              開発向けに最適化した推論モデル codex-1 を採用し、<b>用意されたテストに合格するまで自動でコードを直し続ける</b>。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p class="callout__title">AIエージェントとは</p>
+        <p>単に「質問に答えるだけ」ではなく、人が細かな手順を指定しなくても
+        <b>自ら目標を分解し、最適な行動計画を立てて実行する</b>人工知能システム。Operator と Codex がその例。</p>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 11 ============================ -->
+    <section id="numbers">
+      <h2><span class="num">11</span>数字・年号シート</h2>
+      <p class="sec-lead">試験前日に、ここだけ見返す。数字は選択肢の入れ替えでそのまま問われる。</p>
+
+      <h3>年月</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">年月</th><th>できごと</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap t-num">2018年6月</td><td>GPT-1 発表</td></tr>
+            <tr><td class="nowrap t-num">2019年2月</td><td>GPT-2 発表（当初フルモデル非公開）</td></tr>
+            <tr><td class="nowrap t-num">2020年5月</td><td>GPT-3 発表</td></tr>
+            <tr><td class="nowrap t-num">2022年1月</td><td>InstructGPT リリース ／ GPT-3.5 発表</td></tr>
+            <tr><td class="nowrap t-num">2022年11月</td><td><b>ChatGPT 公表</b>（GPT-3.5 ベース）</td></tr>
+            <tr><td class="nowrap t-num">2023年3月</td><td>GPT-4 発表 ／ Code Interpreter 発表（実装は7月）</td></tr>
+            <tr><td class="nowrap t-num">2023年10月</td><td>Image Generation 発表</td></tr>
+            <tr><td class="nowrap t-num">2023年11月</td><td>GPTs 発表</td></tr>
+            <tr><td class="nowrap t-num">2023年12月</td><td>Gemini 初代（Google DeepMind）</td></tr>
+            <tr><td class="nowrap t-num">2024年2月</td><td><b>Sora</b> 発表（動画生成AI）</td></tr>
+            <tr><td class="nowrap t-num">2024年3月</td><td>Claude 3 発表（Anthropic）</td></tr>
+            <tr><td class="nowrap t-num">2024年5月</td><td><b>GPT-4o</b> 発表（オムニモーダル）</td></tr>
+            <tr><td class="nowrap t-num">2024年9月</td><td>GPT-o1 発表</td></tr>
+            <tr><td class="nowrap t-num">2025年1月</td><td>Operator 発表</td></tr>
+            <tr><td class="nowrap t-num">2025年4月</td><td>GPT-o3 ／ GPT-o4 ／ GPT-4.1 発表</td></tr>
+            <tr><td class="nowrap t-num">2025年5月</td><td>Codex 公開（研究プレビュー） ／ <b>Veo 3</b> 発表（Google DeepMind）</td></tr>
+            <tr><td class="nowrap t-num">2025年8月</td><td><b>GPT-5</b> 発表</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>数値</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th class="nowrap">数値</th><th>何の数字か</th></tr></thead>
+          <tbody>
+            <tr><td class="nowrap t-num">約1億1,700万</td><td>GPT-1 のパラメータ数</td></tr>
+            <tr><td class="nowrap t-num">約15億</td><td>GPT-2 のパラメータ数（データセットは GPT-1 の約10倍）</td></tr>
+            <tr><td class="nowrap t-num">約1,750億</td><td>GPT-3 のパラメータ数</td></tr>
+            <tr><td class="nowrap t-num">約3,550億</td><td>GPT-3.5 のパラメータ数</td></tr>
+            <tr><td class="nowrap t-num">約1兆7,600億</td><td>GPT-4 のパラメータ数</td></tr>
+            <tr><td class="nowrap t-num">2021年9月</td><td>GPT-3.5・GPT-4 の学習データの範囲</td></tr>
+            <tr><td class="nowrap t-num">19〜29%</td><td>GPT-4 のハルシネーション減少率（GPT-3.5 比）</td></tr>
+            <tr><td class="nowrap t-num">26言語中24言語</td><td>GPT-4 が GPT-3.5 の英語精度を上回った言語数</td></tr>
+            <tr><td class="nowrap t-num">70.1% ／ 79.9%</td><td>GPT-3.5 の英語 ／ GPT-4 の日本語 の出力精度</td></tr>
+            <tr><td class="nowrap t-num">232ms ／ 320ms</td><td>GPT-4o の音声応答（最短 ／ 平均）</td></tr>
+            <tr><td class="nowrap t-num">20秒 ／ 1080p</td><td>Sora 製品版の最長尺 ／ 最大解像度</td></tr>
+            <tr><td class="nowrap t-num">104万トークン</td><td>Gemini 2.5 Pro の最大コンテキスト</td></tr>
+            <tr><td class="nowrap t-num">約20万トークン</td><td>Claude の標準コンテキスト（最大100万トークン超）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 12 ============================ -->
+    <section id="traps">
+      <h2><span class="num">12</span>ひっかけ対策</h2>
+      <p class="sec-lead">「最も不適切なものはどれか」で狙われる論点を、<b>誤り → 正しい</b>の形で並べた。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:47%">よくある誤りの肢</th><th>正しくは</th></tr></thead>
+          <tbody>
+            <tr><td>現在は GAN と VAE が主流で、拡散モデルはほとんど使われていない</td>
+                <td>GAN・VAE から移行し、<b>現在は拡散モデルが主流</b></td></tr>
+            <tr><td>拡散モデルは、ノイズを段階的に<b>加えて</b>いくことで画像を完成させる</td>
+                <td>ノイズを段階的に<b>除去</b>して完成させる</td></tr>
+            <tr><td>VAE のエンコーダは、潜在ベクトルから元データを復元する</td>
+                <td>エンコーダ＝<b>圧縮して潜在ベクトルへ</b>、デコーダ＝<b>復元</b></td></tr>
+            <tr><td>音声生成AI のトレーニングには、一般的に<b>強化学習</b>が用いられる</td>
+                <td>一般的に <b>教師あり学習</b> が用いられる</td></tr>
+            <tr><td>音声生成AI は技術的制約により、感情表現には対応できない</td>
+                <td>TTS も Eleven Labs も<b>感情表現に対応</b></td></tr>
+            <tr><td>音楽生成AI の普及で、音楽家への需要は増加するとされている</td>
+                <td>需要が<b>減少</b>する可能性がある（職業への影響）</td></tr>
+            <tr><td>AI で生成された動画は、人間の手作業の制作物より<b>常に高品質</b></td>
+                <td>連続性や音と映像の同期の点で<b>品質が劣る可能性</b>がある</td></tr>
+            <tr><td>生成物の正確性は自動的に担保されるため、人間の確認は不要</td>
+                <td><b>信頼性・正確性は人間がチェックする必要がある</b></td></tr>
+            <tr><td>生成物の著作権は自動的に利用者に帰属するため、権利処理は不要</td>
+                <td>知的財産権を<b>侵害する可能性</b>があり、権利関係のチェックが必要</td></tr>
+            <tr><td>ChatGPT は公表と同時に開発が始まり、それ以前のバージョンはない</td>
+                <td>公表の<b>数年前から複数のバージョンが存在</b>する</td></tr>
+            <tr><td>2022年11月の ChatGPT は <b>GPT-4</b> をベースにしている</td>
+                <td><b>GPT-3.5</b> をベースにしている</td></tr>
+            <tr><td>GPT-2 は安全性が確認され、発表と同時にフルモデルが公開された</td>
+                <td>誤用・悪用リスクから<b>当初は一部バージョンが非公開</b></td></tr>
+            <tr><td>GPT-3 は直感的な理解と外部知識へのアクセスを獲得した</td>
+                <td>それらを<b>欠いており</b>、人間と同等の理解には至っていない</td></tr>
+            <tr><td>RLHF は GPT-3 で初めて採用され、GPT-3.5 では見送られた</td>
+                <td><b>InstructGPT と GPT-3.5 が RLHF を採用</b>（GPT-3 は不採用）</td></tr>
+            <tr><td>InstructGPT の目的は、パラメータ数を削減して高速化すること</td>
+                <td>目的は<b>攻撃的・誤った出力を人間のフィードバックで矯正すること</b></td></tr>
+            <tr><td>GPT-4 ではハルシネーションが完全に解消された</td>
+                <td>生じるが、GPT-3.5 比で <b>19〜29% 程度減少</b></td></tr>
+            <tr><td>GPT-4 は 2023年時点の情報まで学習している</td>
+                <td>学習データは GPT-3.5 と同じく <b>2021年9月まで</b></td></tr>
+            <tr><td>GPT-4.1 は推論特化モデルで、数学の難問の正答率を最優先に高めた</td>
+                <td>GPT-4.1 は<b>開発実務向けの改良版</b>（推論特化は o シリーズ）</td></tr>
+            <tr><td>GPTs は文章や画像から映像を作り出す機能である</td>
+                <td>GPTs は<b>オリジナルの ChatGPT を作る機能</b>（映像は Sora）</td></tr>
+            <tr><td>Operator は文章や画像から映像を生成する動画生成AI である</td>
+                <td>Operator は<b>Web 画面を操作する AI エージェント</b></td></tr>
+            <tr><td>Image Generation は従来と同じ拡散モデルを採用している</td>
+                <td><b>自己回帰型</b>（左上から右下へ順に描く）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="hr">
+
+    <!-- ============================ 13 ============================ -->
+    <section id="quiz">
+      <h2><span class="num">13</span>一問一答</h2>
+      <p class="sec-lead">クリックすると答えが開く。声に出して答えてから開くと定着が早い。</p>
+
+      <div class="qa-tools">
+        <button class="btn" id="openAll" type="button">すべて開く</button>
+        <button class="btn" id="closeAll" type="button">すべて閉じる</button>
+      </div>
+
+      <details class="qa"><summary>シラバスで挙げられている生成AIの5分類は？</summary>
+        <div class="qa__a"><div>テキスト生成AI／画像生成AI／音楽生成AI／音声生成AI／動画生成AI。</div></div></details>
+
+      <details class="qa"><summary>NLP の正式名称と意味は？</summary>
+        <div class="qa__a"><div>Natural Language Processing（自然言語処理）。コンピュータに人間の言葉を理解させるための技術。</div></div></details>
+
+      <details class="qa"><summary>LLM とは何か？</summary>
+        <div class="qa__a"><div>Large Language Model（大規模言語モデル）。非常に大規模なデータセットで学習された自然言語処理モデルで、代表例は ChatGPT。</div></div></details>
+
+      <details class="qa"><summary>ChatGPT・Claude・Gemini・Copilot の提供元は？</summary>
+        <div class="qa__a"><div>ChatGPT＝OpenAI／Claude＝Anthropic／Gemini＝Google（Google DeepMind）／Copilot＝Microsoft。</div></div></details>
+
+      <details class="qa"><summary>画像生成AI の学習で行う前処理の代表的な3手法は？</summary>
+        <div class="qa__a"><div>画像のリサイズ、正規化、データの水増し。</div></div></details>
+
+      <details class="qa"><summary>GAN はどうやって高品質な画像を作る？</summary>
+        <div class="qa__a"><div>生成器と識別器という2つのネットワークを競わせる（敵対的に学習させる）ことで生成品質を高める。</div></div></details>
+
+      <details class="qa"><summary>VAE のエンコーダとデコーダの役割は？</summary>
+        <div class="qa__a"><div>エンコーダは情報を圧縮して潜在ベクトル（特徴を要約した情報）にする。デコーダは潜在ベクトルから元のデータに近いものを復元する。</div></div></details>
+
+      <details class="qa"><summary>画像生成AI の現在の主流手法は？</summary>
+        <div class="qa__a"><div>ディフュージョン（拡散）モデル。ノイズを段階的に除去することで、安定学習と超高精細を実現する。GAN・VAE 中心から移行した。</div></div></details>
+
+      <details class="qa"><summary>自己回帰型 Transformer を組み合わせると何ができるようになった？</summary>
+        <div class="qa__a"><div>画像をトークン化して順次生成することで、看板の文字や細線などの細部も破綻なく表現できるようになった。</div></div></details>
+
+      <details class="qa"><summary>音楽生成AI が学習に使うデータの代表例は？</summary>
+        <div class="qa__a"><div>MIDIファイル（デジタル音楽のインターフェース規格）等の音楽データ。</div></div></details>
+
+      <details class="qa"><summary>音楽生成AI が「より好まれる音楽」を作れるようになる仕組みは？</summary>
+        <div class="qa__a"><div>人間のリスナーからのフィードバックを、新たな学習データとしてデータセットに追加していく。</div></div></details>
+
+      <details class="qa"><summary>音声生成AI のトレーニングに一般的に用いられる学習方法は？</summary>
+        <div class="qa__a"><div>教師あり学習。（強化学習・教師なし学習は誤り）</div></div></details>
+
+      <details class="qa"><summary>TTS とは何の略で、どんな技術？</summary>
+        <div class="qa__a"><div>Text-to-Speech。テキストを自然な音声へ変換する技術で、多言語・多話者・感情表現に対応する。</div></div></details>
+
+      <details class="qa"><summary>Eleven Labs の特徴は？</summary>
+        <div class="qa__a"><div>少量のサンプルから声色を再現できる高品質な TTS。感情や話速の制御、多言語合成に対応する。</div></div></details>
+
+      <details class="qa"><summary>動画生成AI でフレーム間の一貫性を保つために利用される技術は？</summary>
+        <div class="qa__a"><div>連続性のあるデータの処理に適した RNN。（訓練手法自体は GAN や VAE）</div></div></details>
+
+      <details class="qa"><summary>Sora の提供元・発表時期・生成できる動画の長さは？</summary>
+        <div class="qa__a"><div>OpenAI が2024年2月に発表。製品版は最長20秒・最大1080p（フルHD）。発表時は「最長1分の可能性」として注目された。</div></div></details>
+
+      <details class="qa"><summary>Veo 3 の提供元と、Sora にない特徴は？</summary>
+        <div class="qa__a"><div>Google DeepMind が2025年5月に発表。超高精細映像に加えて、環境音やセリフ等の音声も同時に合成できる。</div></div></details>
+
+      <details class="qa"><summary>ディープフェイクとは？</summary>
+        <div class="qa__a"><div>ディープラーニングや生成AIを利用して非常にリアルなコンテンツを作り、人を故意に騙すことを目的として使用される技術。偽情報（ディスインフォメーション）の拡散という社会問題を引き起こしている。</div></div></details>
+
+      <details class="qa"><summary>ChatGPT の「GPT」の各文字の意味は？</summary>
+        <div class="qa__a"><div>G＝Generative（生成）／P＝Pre-trained（事前学習）／T＝Transformer（Transformerモデル）。Chat は対話型。</div></div></details>
+
+      <details class="qa"><summary>ChatGPT の開発元と公表時期、ベースになったモデルは？</summary>
+        <div class="qa__a"><div>OpenAI が2022年11月に公表。GPT-3.5 を対話向けにファインチューニングした Web アプリケーションサービス。</div></div></details>
+
+      <details class="qa"><summary>GPT-1・GPT-2・GPT-3 の発表時期は？</summary>
+        <div class="qa__a"><div>GPT-1＝2018年6月／GPT-2＝2019年2月／GPT-3＝2020年5月。</div></div></details>
+
+      <details class="qa"><summary>GPT-1 〜 GPT-4 のパラメータ数は？</summary>
+        <div class="qa__a"><div>GPT-1＝約1億1,700万／GPT-2＝約15億／GPT-3＝約1,750億／GPT-3.5＝約3,550億／GPT-4＝約1兆7,600億。</div></div></details>
+
+      <details class="qa"><summary>GPT-2 が当初フルモデルを公開しなかった理由は？</summary>
+        <div class="qa__a"><div>性能が高く、誤用・悪用のリスクを理解して管理する仕組みが十分に整備されていなかったため、予防策として一部のバージョンを非公開とした。</div></div></details>
+
+      <details class="qa"><summary>GPT-3 で新しくできるようになったことは？</summary>
+        <div class="qa__a"><div>微調整（ファインチューニング）なしで、幅広い自然言語処理タスクを実行できるようになった。</div></div></details>
+
+      <details class="qa"><summary>RLHF の正式名称と内容は？</summary>
+        <div class="qa__a"><div>Reinforcement Learning from Human Feedback。人間のフィードバックに基づいて出力を矯正する強化学習の手法。</div></div></details>
+
+      <details class="qa"><summary>アライメント（Alignment）とは？</summary>
+        <div class="qa__a"><div>モデルを、人間の求める適切な回答を出すように調整すること。</div></div></details>
+
+      <details class="qa"><summary>InstructGPT はいつ・何をベースに作られた？</summary>
+        <div class="qa__a"><div>2022年1月リリース。GPT-3 をベースに RLHF を採用したモデル。</div></div></details>
+
+      <details class="qa"><summary>GPT-3.5 と GPT-3 の大きな違いは？</summary>
+        <div class="qa__a"><div>GPT-3.5 は RLHF を採用し、人間の一定の価値観に基づく範囲内で動作するように設計されている点。</div></div></details>
+
+      <details class="qa"><summary>ハルシネーションとは？ GPT-4 ではどうなった？</summary>
+        <div class="qa__a"><div>モデルが不正確あるいは誤った情報を、あたかも正確・正しい情報のように生成すること。GPT-4 でも生じるが、GPT-3.5 と比べて19〜29%程度減少した（完全解消ではない）。</div></div></details>
+
+      <details class="qa"><summary>GPT-4 の学習データの範囲は？</summary>
+        <div class="qa__a"><div>GPT-3.5 と同じく、2021年9月までの情報。</div></div></details>
+
+      <details class="qa"><summary>マルチモーダルとは？</summary>
+        <div class="qa__a"><div>テキスト・画像・音声・動画などの異なる種類のデータを一度に処理することが可能な AI 技術。モーダルは「入力方法」の意味。</div></div></details>
+
+      <details class="qa"><summary>GPT-4o の「o」の意味と、マルチモーダルとの違いは？</summary>
+        <div class="qa__a"><div>「o」はオムニ（すべての）。マルチモーダルが各データを個別に処理するのに対し、オムニモーダルはすべてを継ぎ目なく統合して同時に理解・分析する。2024年5月リリース。</div></div></details>
+
+      <details class="qa"><summary>Code Interpreter でできることは？</summary>
+        <div class="qa__a"><div>ChatGPT が Python でコードを書いて実行し、データ分析・グラフ作成・数学の計算・ファイルの読み書きを行う。2023年3月発表、7月実装。</div></div></details>
+
+      <details class="qa"><summary>GPTs の正式名称と機能は？</summary>
+        <div class="qa__a"><div>Generative Pre-trained Transformers。用途に合わせてカスタマイズした「オリジナルの ChatGPT」を作れる機能。振る舞いの設定・ファイル参照・外部API連携ができ、GPT ストアで公開・利用できる。</div></div></details>
+
+      <details class="qa"><summary>リーズニングモデル（GPT-o1 など）の設計思想は？</summary>
+        <div class="qa__a"><div>速く答えることよりも推論の質を重視し、先にじっくり考えてから応答する。数学の証明やアルゴリズム設計などに強い。</div></div></details>
+
+      <details class="qa"><summary>GPT-4.1 と GPT-5 の位置づけは？</summary>
+        <div class="qa__a"><div>GPT-4.1（2025年4月）は開発実務向けの改良版で、超長文や大規模コードを一度に扱える。GPT-5（2025年8月）は推論力とスピードが大幅に進化し、標準版／Thinking／Pro の三種類。Thinking と Pro では誤情報が大幅に減少。</div></div></details>
+
+      <details class="qa"><summary>Operator と Codex はそれぞれ何をするもの？</summary>
+        <div class="qa__a"><div>Operator（2025年1月）＝Web 画面を解析してクリックや入力を自動実行する AI エージェント。Codex（2025年5月）＝バグ修正・機能追加・テストまで自律的に支援するソフトウェア開発向け AI エージェント。</div></div></details>
+
+      <details class="qa"><summary>Image Generation が従来の画像生成モデルと違う点は？</summary>
+        <div class="qa__a"><div>DALL·E や Stable Diffusion の拡散モデルと異なり、左上から右下へ順に描く自己回帰型を採用している。文字入りや複雑なレイアウトに強い。2023年10月発表。</div></div></details>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  <p><b>このノートについて</b> — 生成AIパスポート試験（一般社団法人 生成AI活用普及協会／GUGA）の
+  第7シラバス（2026年2月試験より適用）のうち、第2章「ChatGPT」と第3章「生成AIができることと主なサービス」を対象にした自習用の要点メモ。</p>
+  <p>記載は試験対策としての整理であり、公式の見解ではない。出題範囲・受験要項は必ず公式サイトの一次情報で確認すること。</p>
+  <p>モデルの仕様や提供状況は変化が速いため、年月・数値は<b>試験教材の記述に合わせて</b>いる。</p>
+  <a class="backtop" href="#">↑ ページ先頭へ</a>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- theme ---------- */
+  var root = document.documentElement;
+  var themeBtn = document.getElementById("themeBtn");
+  var order = ["auto", "light", "dark"];
+  var labels = { auto: "◐ 自動", light: "☀ 明るい", dark: "☾ 暗い" };
+
+  function readTheme() {
+    try { return localStorage.getItem("gp-theme") || "auto"; } catch (e) { return "auto"; }
+  }
+  function applyTheme(t) {
+    if (t === "auto") { root.removeAttribute("data-theme"); }
+    else { root.setAttribute("data-theme", t); }
+    themeBtn.textContent = labels[t];
+    themeBtn.setAttribute("aria-label", "配色: " + labels[t] + "（クリックで切替）");
+  }
+  var theme = readTheme();
+  applyTheme(theme);
+  themeBtn.addEventListener("click", function () {
+    theme = order[(order.indexOf(theme) + 1) % order.length];
+    try { localStorage.setItem("gp-theme", theme); } catch (e) {}
+    applyTheme(theme);
+  });
+
+  /* ---------- print ---------- */
+  document.getElementById("printBtn").addEventListener("click", function () {
+    document.querySelectorAll("details.qa").forEach(function (d) { d.open = true; });
+    window.print();
+  });
+
+  /* ---------- reading progress ---------- */
+  var bar = document.getElementById("progress");
+  function updateProgress() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    bar.style.width = pct + "%";
+  }
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
+  updateProgress();
+
+  /* ---------- scroll spy ---------- */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+  var sections = Array.prototype.slice.call(document.querySelectorAll("main section[id]"));
+
+  function setActive(id) {
+    links.forEach(function (a) { a.classList.remove("is-active"); });
+    if (map[id]) { map[id].classList.add("is-active"); }
+  }
+  if ("IntersectionObserver" in window) {
+    var visible = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { visible[en.target.id] = en.isIntersecting; });
+      for (var i = 0; i < sections.length; i++) {
+        if (visible[sections[i].id]) { setActive(sections[i].id); return; }
+      }
+    }, { rootMargin: "-80px 0px -70% 0px", threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---------- Q&A bulk toggle ---------- */
+  var qas = Array.prototype.slice.call(document.querySelectorAll("details.qa"));
+  document.getElementById("openAll").addEventListener("click", function () {
+    qas.forEach(function (d) { d.open = true; });
+  });
+  document.getElementById("closeAll").addEventListener("click", function () {
+    qas.forEach(function (d) { d.open = false; });
+  });
+})();
+</script>
+</body>
+</html>
